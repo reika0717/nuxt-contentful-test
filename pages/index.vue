@@ -9,8 +9,10 @@
           <div class="card-content">
             <div class="content">
               {{ post.fields.description }}
-              <br />
+              <br>
               <small>{{ ( new Date(post.fields.publishDate)).toDateString() }}</small>
+              <br>
+              <a v-for="(tag, index) in post.fields.tags" :key="index" >{{ tag }}</a>
             </div>
           </div>
           <footer class="card-footer">
@@ -45,11 +47,38 @@ export default {
         order: "-fields.publishDate"
       })
       .then(entries => {
+        console.log(entries.items)
         return {
           posts: entries.items
         };
       })
       .catch(console.error);
+  },
+  methods: {
+
   }
 };
 </script>
+
+<style scoped>
+.card {
+  width: 300px;
+  height: 200px;
+  box-shadow: 1px 2px 3px 1px rgba(0, 0, 0, 0.2);
+  border: 0.5px solid rgb(57, 72, 85);
+  padding: 10px 20px;
+  margin: 10px 10px;
+}
+.card_title {
+  font-size: 1.2rem;
+}
+.card_text {
+  color: rgb(57, 72, 85);
+  margin: 10px 0;
+}
+.card_date {
+  font-size: 0.7rem;
+  color: rgb(57, 72, 85);
+  text-align: right;
+}
+</style>
