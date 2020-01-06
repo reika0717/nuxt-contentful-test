@@ -9,15 +9,19 @@
           <div class="card-content">
             <div class="content">
               {{ post.fields.description }}
-              <br>
+              <br />
               <small>{{ ( new Date(post.fields.publishDate)).toDateString() }}</small>
-              <br>
-              <a v-for="(tag, index) in post.fields.tags" :key="index" >{{ tag }}</a>
+              <br />
+              <nuxt-link
+                v-for="(tag, index) in post.fields.tags"
+                :key="index"
+                :to="{ names: 'tags', params: `${tag.sys.id}`, path: `/tags/${tag.sys.id}/`}"
+              >{{ tag.fields.name }}</nuxt-link>
             </div>
           </div>
           <footer class="card-footer">
             <nuxt-link
-              :to="{ name: 'slug', params: { slug: post.fields.slug }}"
+              :to="{ name: 'id', params: { id: post.sys.id }}"
               class="card-footer-item"
             >Read More</nuxt-link>
           </footer>
@@ -47,16 +51,14 @@ export default {
         order: "-fields.publishDate"
       })
       .then(entries => {
-        console.log(entries.items)
+        console.log(entries.items);
         return {
           posts: entries.items
         };
       })
       .catch(console.error);
   },
-  methods: {
-
-  }
+  methods: {}
 };
 </script>
 

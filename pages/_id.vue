@@ -21,12 +21,12 @@
         <nuxt-link
           v-if="prevPost"
           class="pagination-previous"
-          :to="prevPost.fields.slug"
+          :to="prevPost.sys.id"
         >&laquo; {{ prevPost.fields.title }}</nuxt-link>
         <nuxt-link
           v-if="nextPost"
           class="pagination-next"
-          :to="nextPost.fields.slug"
+          :to="nextPost.sys.id"
         >{{ nextPost.fields.title }} &raquo;</nuxt-link>
       </nav>
     </article>
@@ -68,7 +68,7 @@ export default {
       .then(entries => {
         const posts = entries.items;
         const current = posts.filter(function(item) {
-          return item.fields.slug === params.slug;
+          return item.sys.id === params.id;
         });
         return {
           allPosts: posts,
