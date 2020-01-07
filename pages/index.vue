@@ -15,7 +15,7 @@
               <nuxt-link
                 v-for="(tag, index) in post.fields.tags"
                 :key="index"
-                :to="{ names: 'tags', params: `${tag.sys.id}`, path: `/tags/${tag.sys.id}/`}"
+                :to="{ name: 'tags-id', params: {id: tag.sys.id}}"
               >{{ tag.fields.name }}</nuxt-link>
             </div>
           </div>
@@ -30,6 +30,7 @@
     </div>
   </div>
 </template>
+
 
 <script>
 import { createClient } from "~/plugins/contentful.js";

@@ -1,9 +1,13 @@
 const pkg = require('./package')
 const config = require('./.contentful.json')
+const contentful = require('contentful')
+const client = contentful.createClient({
+  space: config.CTF_SPACE_ID,
+  accessToken: config.CTF_CDA_ACCESS_TOKEN
+})
 
 module.exports = {
-  mode: 'universal',
-
+  mode: 'spa',
   /*
    ** Headers of the page
    */
@@ -39,7 +43,7 @@ module.exports = {
    ** Customize the progress-bar color
    */
   loading: {
-    color: '#FFFFFF'
+    color: '#3B8070'
   },
 
   /*
@@ -50,9 +54,9 @@ module.exports = {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: ['./plugins/contentful.js'],
 
-  /*
+  /*mi
    ** Nuxt.js modules
    */
   modules: [],
@@ -81,8 +85,11 @@ module.exports = {
       return client.getEntries({
         'content_type': config.CTF_BLOG_POST_TYPE_ID
       }).then((entries) => {
-        return [...entries.items.map(entry => `posts/${entry.fields.slug}`)]
+        return [...entries.items.map(entry => `/${entry.sys.id}`)]
       })
     }
+  },
+  router: {
+    base: process.env.NODE_ENV === "dev" ? "/" : "/amed/contentful-test/"
   },
 }
