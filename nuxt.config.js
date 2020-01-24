@@ -15,7 +15,7 @@ const routes = async function() {
     client.getEntries({ content_type: 'tag' })
   ]);
   return [
-    ...post.items.map(item => `/entry/${item.sys.id}`),
+    ...post.items.map(item => `/${item.sys.id}`),
     ...tag.items.map(item => `/tags/${item.sys.id}`)
   ];
 };
