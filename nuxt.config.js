@@ -90,6 +90,6 @@ module.exports = {
     }
   },
   router: {
-    base: process.env.NODE_ENV === "dev" ? "/" : "/nuxt-contentful-test/"
+    base: "/nuxt-contentful-test/"
   },
 }

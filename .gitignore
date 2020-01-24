@@ -8,8 +8,10 @@ npm-debug.log
 .nuxt
 
 # Nuxt generate
+dist
 
 # IDE
 .idea
 
 .contentful.json
+.DS_Store
